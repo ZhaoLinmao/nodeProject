@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:03 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="assets/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/img/favicon.ico"> <link href="assets/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="assets/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="assets/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="assets/css/animate.min.css" rel="stylesheet">
+
+
+    <!--welcome-->
+    <!--<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="assets/bootstrap-table/src/bootstrap-table.css">-->
+    <!--<link rel="stylesheet" href="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css">-->
+    <!--<link rel="stylesheet" href="assets/examples.css">-->
+    <!--<script src="assets/jquery.min.js"></script>-->
+    <!--<script src="assets/bootstrap/js/bootstrap.min.js"></script>-->
+    <!--<script src="ga.js"></script>-->
+
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Style -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>样式</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-wrench"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#">选项1</a>
+                    </li>
+                    <li><a href="#">选项2</a>
+                    </li>
+                </ul>
+                <a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="row row-lg">
+                <div class="col-sm-11">
+                    <!-- Example Classes -->
+                    <div id="toolbar" class="form-inline">
+                        <input  name="aaa" class="form-control" >
+                        <input  name="bbb" class="form-control" >
+                        <select  name="ccc" class="form-control">
+                            <option value="a">bbb</option>
+                        </select>
+                        <button class="form-control" onclick="query()">查询</button>
+                    </div>
+                    <table id="table"
+                        ></table>
+                    <!-- End Example Classes -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Panel Other -->
+</div>
+<script src="assets/js/jquery.min.js?v=2.1.4"></script>
+<script src="assets/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="assets/js/content.min.js?v=1.0.0"></script>
+<script src="assets/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="assets/js/plugins/bootstrap-table/bootstrap-table-export.js"></script>
+<script src="assets/js/plugins/bootstrap-table/tableExport.js"></script>
+<script src="assets/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<script>
+
+        $(function () {
+            initBootstrapTable();
+        });
+
+        function query(){
+            initBootstrapTable();
+        }
+
+        function initBootstrapTable(){
+            $('#table').bootstrapTable('destroy').bootstrapTable({
+                method:"post",
+                url: '/index/data',
+                cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                striped: true, //设置为 true 会有隔行变色效果
+                pagination: true, //启动分页
+                pageSize: 10, //每页显示的记录数
+                pageNumber:1, //当前第几页
+                pageList: [5, 10, 15, 20, 25,"ALL"], //记录数可选列表
+                search: false, //是否启用查询
+                showColumns: true, //显示下拉框勾选要显示的列
+                minimumCountColumns:2,//过滤列时做少可以省下多少列
+                showRefresh: true,//显示刷新按钮
+                sidePagination:"server",//服务器端分页
+                height: 500,//table高度
+                clickToSelect:true,//点击行内数据 进行checkbox选中
+                sortable: true,
+                toolbar:"#toolbar",//查询工具 自定义空间
+                paginationPreText: "上一页",//上一页下一页图标 可自定义
+                paginationNextText: "下一页",//上一页下一页图标 可自定义
+                maintainSelected:true,
+                sortable:true,
+                queryParams:function(params){//查询参数
+                    $("#toolbar :input").each(function(i,e){
+                        if($(e).attr("name")!=undefined){
+                            params[$(e).attr("name")] = $(e).val();
+                        }
+                    });
+                    return params;
+                },
+                showPaginationSwitch:false,//显示分页标签控制按钮
+                showToggle:true,//选择性显示列 如果不想看到的列可以在此过滤掉
+                cardView:false,//已卡片样式展示列表
+                detailView:true,//详细列表显示 前面添加一个“ + ”点击可以看到详细列表
+                detailFormatter:function(index,row){//详细信息拦截处理
+                    var result = "";
+                    for(var obj in row){
+                        if(row[obj]!=undefined) {
+                            result += "<div class='col-md-3'>"+obj + ":" + row[obj] + "\n</div>";
+                        }else{
+                            result += "<div class='col-md-3'>"+obj + ":\n</div>"
+                        }
+                    }
+                    return JSON.stringify(row);
+                },
+
+                showExport:true,//table导出   server 服务器分页只能导出当前页  client分页 可以按规则导出
+                exportDataType: "selected",//导出文件 basic 是本页信息、all是所有信息、selected被选中信息
+
+                columns: [{//table 列定义
+                    field: 'field0',
+                    checkbox: true,
+                    align: 'center',
+                    valign: 'middle',
+                    rowspan: 1,
+                    colspan: 1
+                },{
+                    field: 'field15',
+                    title: 'Item ID',
+                    formatter:function(value,row,index){//数据信息处理
+                        return value;
+                    }
+                }, {
+                    field: 'field1',
+                    title: 'Item Name'
+                }, {
+                    field: 'field2',
+                    title: 'Item Price'
+                }, {
+                    field: 'field3',
+                    title: 'Item Name111',
+                    visible:false,//table模式下 是否显示列
+                    cardVisible:false,//card模式下 是否显示列
+                    switchable:false //可选择   界面自定义是否显示 true：可自定义
+                }, {
+                    field: 'field4',
+                    title: 'Item Price',
+                    cardVisible:false,
+                    switchable:false
+                }, {
+                    field: 'field5',
+                    title: 'Item Name',
+                    cardVisible:false,
+                    switchable:false
+                }, {
+                    field: 'field6',
+                    title: 'Item Price',
+                    cardVisible:false,
+                    switchable:false
+                }, {
+                    field: 'field7',
+                    title: 'Item Name',
+                    cardVisible:false,
+                    switchable:false
+                }, {
+                    field: 'field8',
+                    title: 'Item Price',
+                    cardVisible:false,
+                    switchable:false
+                }, {
+                    field: 'field9',
+                    title: 'Item Name',
+                    cardVisible:false,
+                    switchable:false
+                }, {
+                    field: 'field10',
+                    title: 'Item Price',
+                    cardVisible:false,
+                    switchable:false
+                }, {
+                    field: 'field11',
+                    title: 'Item Name',
+                    cardVisible:false,
+                    switchable:false
+                }, {
+                    field: 'field12',
+                    title: 'Item Price',
+                    cardVisible:false,
+                    switchable:false
+                }, {
+                    field: 'field13',
+                    title: 'Item Name',
+                    cardVisible:false,
+                    switchable:false
+                }, {
+                    field: 'field14',
+                    title: 'Item Price',
+                    cardVisible:false,
+                    switchable:false
+                }]
+            });
+        }
+
+</script>
+
+</body>
+</html>
