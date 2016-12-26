@@ -1,0 +1,16 @@
+{
+  "webServer":{
+    "host":"127.0.0.1",
+    "port":3000
+  },
+  "tcpServer":{
+    "host":"127.0.0.1",
+    "port":6670
+  },
+  "udpServer":{
+    "host":"127.0.0.1",
+    "port":6688,
+    "serverHost":"127.0.0.1",
+    "serverPort":6666
+  }
+}
