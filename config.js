@@ -16,5 +16,7 @@ config.udpServerHost = configFs.udpServer.host;
 config.udpServerPort = configFs.udpServer.port;
 config.udpServerSendHost = configFs.udpServer.serverHost;
 config.udpServerSendPort = configFs.udpServer.serverPort;
+//文件上传路径
+config.filePath = configFs.system.filePath;
 
 module.exports = config;
