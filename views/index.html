@@ -13,18 +13,8 @@
     <link rel="shortcut icon" href="assets/img/favicon.ico"> <link href="assets/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="assets/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="assets/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="assets/plugins/fileinput/css/fileinput.min.css" rel="stylesheet">
     <link href="assets/css/animate.min.css" rel="stylesheet">
-
-
-    <!--welcome-->
-    <!--<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">-->
-    <!--<link rel="stylesheet" href="assets/bootstrap-table/src/bootstrap-table.css">-->
-    <!--<link rel="stylesheet" href="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css">-->
-    <!--<link rel="stylesheet" href="assets/examples.css">-->
-    <!--<script src="assets/jquery.min.js"></script>-->
-    <!--<script src="assets/bootstrap/js/bootstrap.min.js"></script>-->
-    <!--<script src="ga.js"></script>-->
-
 
 </head>
 
@@ -55,6 +45,9 @@
         <div class="ibox-content">
             <div class="row row-lg">
                 <div class="col-sm-11">
+                    <!--文件上传-->
+
+                    <!--文件上传-->
                     <!-- Example Classes -->
                     <div id="toolbar" class="form-inline">
                         <input  name="aaa" class="form-control" >
@@ -64,8 +57,7 @@
                         </select>
                         <button class="form-control" onclick="query()">查询</button>
                     </div>
-                    <table id="table"
-                        ></table>
+                    <table id="table"></table>
                     <!-- End Example Classes -->
                 </div>
             </div>
@@ -80,6 +72,7 @@
 <script src="assets/js/plugins/bootstrap-table/bootstrap-table-export.js"></script>
 <script src="assets/js/plugins/bootstrap-table/tableExport.js"></script>
 <script src="assets/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="assets/plugins/fileinput/js/fileinput.min.js"></script>
 
 <script>
 
@@ -224,7 +217,6 @@
                 }]
             });
         }
-
 </script>
 
 </body>
