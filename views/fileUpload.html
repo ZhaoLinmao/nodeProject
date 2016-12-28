@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="assets/css/style.min862f.css" rel="stylesheet">
-    <link rel="shortcut icon" href="assets/img/favicon.ico"> <link href="assets/css/bootstrap.min14ed.css" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/img/favicon.ico">
+    <link href="assets/css/bootstrap.min14ed.css" rel="stylesheet">
     <link href="assets/css/font-awesome.min93e3.css" rel="stylesheet">
     <link href="assets/css/plugins/webuploader/webuploader.css" rel="stylesheet">
     <link href="assets/css/animate.min.css" rel="stylesheet">
@@ -103,8 +104,8 @@
                     $list.append(
                             '<div id="' + file.id + '" class="item col-sm-3">' +
                             '<h4 class="info">' + file.name + '</h4>' +
-                            '<p class="state">等待上传...</p>' +
-                            '<a onclick=delFile("'+file.id+'",this)><span class="glyphicon glyphicon-remove"></span></a>'+
+                            '<p class="state">等待上传...       <a onclick=delFile("'+file.id+'",this)>' +
+                            '<span class="glyphicon glyphicon-remove"></span></a></p>' +
                             '</div>'
                     );
                 });
