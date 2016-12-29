@@ -18,6 +18,9 @@
     "log4js":"~1.1.0",
     "express-mysql-session":"~1.2.0",
     "formidable":"~1.0.17",
-    "node-xlsx ":"~0.7.4"
+    "nodemailer":"~2.7.0",
+    "nodemailer-smtp-transport":"~3.3.2",
+    "node-xlsx ":"~0.7.4",
+    "sha1":"~1.1.1"
   }
 }

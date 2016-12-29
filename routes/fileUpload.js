@@ -5,7 +5,7 @@ var fs = require('fs');
 var xlsx = require('node-xlsx');
 var config = require('../config');
 var excleExport = require('../util/excleExport');
-
+var sendEmail = require('../util/sendEmail');
 /* POST users listing. */
 router.post('/', function(req, res, next) {
   res.render('fileUpload');
@@ -22,7 +22,7 @@ router.post('/add', function(req, res, next) {
       form.parse(req, function(err, fields, files) {
           var newFile = config.filePath+'/'+new Date().getTime()+"-"+files.file.name;
           fs.renameSync(files.file.path,newFile);
-
+          sendEmail();
           //excle 导入、导出
           //首先判断是否为excle文件 进行文件导入
           if(files.file.name.indexOf("xlsx")>0||files.file.name.indexOf("xls")>0){
@@ -32,13 +32,13 @@ router.post('/add', function(req, res, next) {
               for(var sheet in workBook){
                   //sheet名称
                   var sheetName = workBook[sheet].name;
-                  console.log(sheetName);
-                  console.log(workBook[sheet].data);
+                  //console.log(sheetName);
+                  //console.log(workBook[sheet].data);
                   //单个sheet文件进行 数据处理
-                  for(var data in workBook[sheet].data){
+                  //for(var data in workBook[sheet].data){
                       //TODO 进行数据处理 可存入数据库
-                      console.log(JSON.stringify(workBook[sheet].data[data]));
-                  }
+                      //console.log(JSON.stringify(workBook[sheet].data[data]));
+                  //}
                   /**
                    * excle 导出
                    * function (path,data,title){}
@@ -53,10 +53,10 @@ router.post('/add', function(req, res, next) {
                    *         title = {"a":"名称","b":"个数","c":"单位","d":"总数"};
                    *         excleExport("D://d.xslx",data,title);
                    */
-                  var data = [{name:"第一个",data:[{a:1,b:2,c:1,d:2},{a:2,b:3,c:4,d:5},{a:5,b:6,c:7,d:8}]},
-                                {name:"第二个",data:[{a:1,b:2,c:1,d:2},{a:2,b:3,c:4,d:5},{a:5,b:6,c:7,d:8}]}],
-                       title = [{"a":"名称","b":"个数","c":"单位","d":"总数"},{"a":"名称1","b":"个数1","c":"单位1","d":"总数1"}];
-                  excleExport("D://d.xlsx",data,title);
+                  //var data = [{name:"第一个",data:[{a:1,b:2,c:1,d:2},{a:2,b:3,c:4,d:5},{a:5,b:6,c:7,d:8}]},
+                  //              {name:"第二个",data:[{a:1,b:2,c:1,d:2},{a:2,b:3,c:4,d:5},{a:5,b:6,c:7,d:8}]}],
+                  //     title = [{"a":"名称","b":"个数","c":"单位","d":"总数"},{"a":"名称1","b":"个数1","c":"单位1","d":"总数1"}];
+                  //excleExport("D://d.xlsx",data,title);
               }
           }
       });
