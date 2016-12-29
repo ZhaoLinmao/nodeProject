@@ -1,25 +1,27 @@
 var express = require('express');
 var router = express.Router();
-var wx = require("weixin-api");
+var wechat = require("node-wechat");
 
 /* 登录 */
 router.post('/', function(req, res, next) {
-    wx.token = "tk328517snowforest";
-    wx.textMsg(function(msg){
-        console.log("响应用户文本消息");
-        console.log(JSON.stringify(msg));
-        var content = "消息内容："+ msg.content+"\n";
-        content = content + "toUserName:" + msg.toUserName + "\n";
-        content = content + "fromUserName:" + msg.fromUserName + "\n";
-        var resMsg = {};
-        resMsg = {
-            fromUserName : msg.toUserName,
-            toUserName : msg.fromUserName,
-            msgType : "text",
-            content : content,
-            funcFlag : 0
-        };
-        wx.sendMsg(resMsg);
+    wechat.token = "tk328517snowforest";
+
+    //监听文本信息
+    wechat.text(function (data) {
+        //console.log(data.ToUserName);
+        //console.log(data.FromUserName);
+        //console.log(data.CreateTime);
+        //console.log(data.MsgType);
+        //...
+        var msg = {
+            FromUserName : data.ToUserName,
+            ToUserName : data.FromUserName,
+            //MsgType : "text",
+            Content : "这是文本回复",
+            //FuncFlag : 0
+        }
+        //回复信息
+        wechat.send(msg);
     });
 });
 
