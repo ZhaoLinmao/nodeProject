@@ -21,6 +21,7 @@
     "nodemailer":"~2.7.0",
     "nodemailer-smtp-transport":"~3.3.2",
     "node-xlsx ":"~0.7.4",
-    "sha1":"~1.1.1"
+    "sha1":"~1.1.1",
+    "weixin-api":"~0.1.7"
   }
 }
