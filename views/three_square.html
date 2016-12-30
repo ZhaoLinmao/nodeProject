@@ -1,6 +1,7 @@
 <div>
     <span>这就是一个方块</span>
     <script>
+        var mesh = new THREE.Mesh;
         function init(){
             var renderer,scene,camera,
                     cube;
@@ -9,29 +10,46 @@
                 canvas: document.getElementById('main')
             });
 
-            renderer.setClearColor(0xffff00); //设置定义区域颜色
+            renderer.setClearColor(0x000000); //设置定义区域颜色
 
             scene = new THREE.Scene(); //创建场景
+
 
             /**
              * 定义照相机，这个是常变的
              *
              */
-            camera = new THREE.PerspectiveCamera(100, 4/3, 1, 100);
-            camera.position.set(20, 20, 50);
+            camera = new THREE.PerspectiveCamera(120, 4/3, 1, 10);
+            camera.position.set(0, 0, 5);
             camera.lookAt(new THREE.Vector3(0, 0, 0));
 
             scene.add(camera); //添加照相机到场景中
+            /**
+             * 我们写一些东西
+             */
 
-            cube = new THREE.Mesh(new THREE.TorusKnotGeometry(10,2)
+            var loadeer = new THREE.OBJLoader();
 
-            );
+            loadeer.load("assets/model/female02/female02.obj",function(obj){
+                mesh = obj;
+                scene.add(mesh);
+            });
+
+
+           /*
+           cube = new THREE.Mesh(new THREE.CubeGeometry(1,1,1));
 
             scene.add(cube);
+            */
 
             // render
             renderer.render(scene, camera);
+
+            mesh.rotation.y+=0.01;
+            if(mesh.rotation.y>Math.PI*2){
+                mesh.rotation.y -= Math.PI*2;
+            }
         }
-        init();
+        setInterval(init(),1000);
     </script>
 </div>

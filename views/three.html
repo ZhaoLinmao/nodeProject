@@ -12,7 +12,9 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/content.min.js"></script>
-    <script src="assets/js/three.js"></script>
+    <script src="assets/js/plugins/three/three.js"></script>
+    <script src="assets/js/plugins/three/loaders/OBJLoader.js"></script>
+    <script src="assets/js/plugins/three/loaders/MTLLoader.js"></script>
     <script src="assets/js/helvetiker_regular.typeface.js"></script>
 </head>
 
@@ -45,7 +47,7 @@
                 <div class="col-sm-4">
                     <ul id="ulNav" class="nav nav-pills nav-stacked" role="tablist">
                         <li role="presentation" class="active"><a href="#" onclick="showImg(this,'/three/square')">方块</a></li>
-                        <li role="presentation"><a href="#" onclick="showImg(this,'/three/square')">Profile</a></li>
+                        <li role="presentation"><a href="#" onclick="showImg(this,'/three/teapot')">茶壶</a></li>
                         <li role="presentation"><a href="#" onclick="showImg(this,'/three/square')">Messages</a></li>
                     </ul>
                 </div>
@@ -74,7 +76,7 @@
                                      *
                                      */
                                     camera = new THREE.PerspectiveCamera(100, 4/3, 1, 100);
-                                    camera.position.set(20, 20, 50);
+                                    camera.position.set(0, 0, 1500);
                                     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
                                     scene.add(camera); //添加照相机到场景中

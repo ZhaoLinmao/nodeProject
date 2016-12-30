@@ -1,28 +1,91 @@
 var express = require('express');
 var router = express.Router();
-var wechat = require("node-wechat");
+var wechat = require("../util/util")("tk328517snowforest");
+var xmlparser = require("express-xml-bodyparser");
 
-/* 登录 */
-router.post('/', function(req, res, next) {
-    wechat.token = "tk328517snowforest";
+/* 微信用户传来的数据 一定要进行xml 拦截 nodejs 不能直接解析xml */
+router.post('/',xmlparser({trim:false}), function(req, res, next) {
+    var msg={},data={};
+    try {
+        data = wechat.getData(req.body.xml);
 
-    //监听文本信息
-    wechat.text(function (data) {
-        //console.log(data.ToUserName);
-        //console.log(data.FromUserName);
-        //console.log(data.CreateTime);
-        //console.log(data.MsgType);
-        //...
-        var msg = {
-            FromUserName : data.ToUserName,
-            ToUserName : data.FromUserName,
-            //MsgType : "text",
-            Content : "这是文本回复",
-            //FuncFlag : 0
+        //链式监听
+        switch(data.MsgType){
+            case "text":
+                msg = {
+                    FromUserName: data.ToUserName,
+                    ToUserName: data.FromUserName,
+                    Title: "宋冬野",
+                    Description: "宋冬野——摩登天空7",
+                    MsgType: "text",
+                    Content:"这是一句话！"
+                };
+            break;
+            case "image":
+                msg = {
+                    FromUserName: data.ToUserName,
+                    ToUserName: data.FromUserName,
+                    Title: "宋冬野",
+                    Description: "宋冬野——摩登天空7",
+                    MsgType: "text",
+                    Content:"这是一个图片！"
+                };
+            break;
+            case "location":
+                msg = {
+                    FromUserName: data.ToUserName,
+                    ToUserName: data.FromUserName,
+                    Title: "宋冬野",
+                    Description: "宋冬野——摩登天空7",
+                    MsgType: "text",
+                    Content:"这是一个位置信息！"
+                };
+            break;
+            case "link":
+                msg = {
+                    FromUserName: data.ToUserName,
+                    ToUserName: data.FromUserName,
+                    Title: "宋冬野",
+                    Description: "宋冬野——摩登天空7",
+                    MsgType: "text",
+                    Content:"这是一个链接！"
+                };
+            break;
+            case "event":
+                msg = {
+                    FromUserName: data.ToUserName,
+                    ToUserName: data.FromUserName,
+                    Title: "宋冬野",
+                    Description: "宋冬野——摩登天空7",
+                    MsgType: "text",
+                    Content:"这是一个事件！"
+                };
+            break;
+            case "voice":
+                msg = {
+                    FromUserName: data.ToUserName,
+                    ToUserName: data.FromUserName,
+                    Title: "宋冬野",
+                    Description: "宋冬野——摩登天空7",
+                    MsgType: "text",
+                    Content:"这是一个音频！"
+                };
+            break;
+            case "video":
+                msg = {
+                    FromUserName: data.ToUserName,
+                    ToUserName: data.FromUserName,
+                    Title: "宋冬野",
+                    Description: "宋冬野——摩登天空7",
+                    MsgType: "text",
+                    Content:"这是一个视频！"
+                };
+            break;
         }
-        //回复信息
-        wechat.send(msg);
-    });
+        res.send(wechat.toXml(msg));
+    } catch (e) {
+        console.log(e);
+    }
 });
 
 module.exports = router;
