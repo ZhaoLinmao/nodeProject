@@ -102,3 +102,42 @@ tcp(config.tcpServerPort,config.tcpServerHost);
 var udp = require('../util/udp');
 udp(config.udpServerPort,config.udpServerHost,config.udpServerSendPort,config.udpServerSendHost);
 
+/**
+ * 微信菜单定义
+ */
+(function(){
+  var API = require('wechat-api');
+
+
+  var api = new API("wx729336346ffea1aa", "b61a2a7a0a67e9f8ea4ab91af80f8f1b");
+  /*null
+   { accessToken: 'bMawBdyY5idQLeX_-ODTWZVhOd51yIklU3oYPeeLTg_8BmqrmUAEEvszsKGDLconZxHOx6Nwd32W50X7ThzBWzgOCQanOeg4Vwv3xMhN7KU',
+   expireTime: 1445244891114 }
+   { errcode: 0, errmsg: 'ok' }*/
+  api.getAccessToken(function (err, token) {
+    console.log(token);
+  });
+
+  var menu = {
+    "button":[
+      {
+        "name":"用户操作",
+        "sub_button":[{
+          "type":"view",
+          "name":"登录",
+          "url":"http://snowforest.6655.la/login"
+        }]
+      },
+      {
+        "type":"click",
+        "name":"平台简介",
+        "key":"V1001_TODAY_INTRODUCTION"
+      }
+    ]
+  };
+  api.createMenu(menu, function (err, result) {
+    console.log(result);
+  });
+})();
+
+

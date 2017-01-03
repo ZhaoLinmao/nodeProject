@@ -52,14 +52,16 @@ router.post('/',xmlparser({trim:false}), function(req, res, next) {
                 };
             break;
             case "event":
-                msg = {
-                    FromUserName: data.ToUserName,
-                    ToUserName: data.FromUserName,
-                    Title: "宋冬野",
-                    Description: "宋冬野——摩登天空7",
-                    MsgType: "text",
-                    Content:"这是一个事件！"
-                };
+                if(data.EventKey =="V1001_TODAY_INTRODUCTION"){
+                    msg = {
+                        FromUserName: data.ToUserName,
+                        ToUserName: data.FromUserName,
+                        Title: "微信平台",
+                        Description: "这是一个事件测试接口",
+                        MsgType: "text",
+                        Content:"这个测试就是说明你点击这个按钮，我可以给你发送我自定义的信息给你参考！"
+                    };
+                }
             break;
             case "voice":
                 msg = {
