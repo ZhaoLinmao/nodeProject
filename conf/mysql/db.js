@@ -32,17 +32,16 @@ db.conf = {
     user            : 'root',
     password        : 'jadite',
     port        : '3366',
-    database        : 'fhc',
+    database        : 'fhc'
 };
 var pool  = mysql.createPool(db.conf);
 
-db.query = function(sql, callback){
-
+db.query = function(sql,params, callback){
     if (!sql) {
         callback();
         return;
     }
-    pool.query(sql, function(err, rows, fields) {
+    pool.query(sql,params, function(err, rows, fields) {
         if (err) {
             console.log(err);
             callback(err, null);
