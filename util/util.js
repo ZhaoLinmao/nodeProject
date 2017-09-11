@@ -91,7 +91,6 @@ Util.prototype.toXml = function(data) {
 
 
 Util.prototype.getData = function (data){
-    console.log(data);
     var msg = {};
     msg.ToUserName = data.tousername[0];
     msg.FromUserName = data.fromusername[0];

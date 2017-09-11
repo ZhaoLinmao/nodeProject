@@ -20,7 +20,7 @@ router.post('/',xmlparser({trim:false}), function(req, res, next) {
                     MsgType: "text",
                     Content:"这是一句话！"
                 };
-            break;
+                break;
             case "image":
                 msg = {
                     FromUserName: data.ToUserName,
@@ -30,7 +30,7 @@ router.post('/',xmlparser({trim:false}), function(req, res, next) {
                     MsgType: "text",
                     Content:"这是一个图片！"
                 };
-            break;
+                break;
             case "location":
                 msg = {
                     FromUserName: data.ToUserName,
@@ -40,7 +40,7 @@ router.post('/',xmlparser({trim:false}), function(req, res, next) {
                     MsgType: "text",
                     Content:"这是一个位置信息！"
                 };
-            break;
+                break;
             case "link":
                 msg = {
                     FromUserName: data.ToUserName,
@@ -50,7 +50,7 @@ router.post('/',xmlparser({trim:false}), function(req, res, next) {
                     MsgType: "text",
                     Content:"这是一个链接！"
                 };
-            break;
+                break;
             case "event":
                 if(data.EventKey =="V1001_TODAY_INTRODUCTION"){
                     msg = {
@@ -62,7 +62,7 @@ router.post('/',xmlparser({trim:false}), function(req, res, next) {
                         Content:"这个测试就是说明你点击这个按钮，我可以给你发送我自定义的信息给你参考！"
                     };
                 }
-            break;
+                break;
             case "voice":
                 msg = {
                     FromUserName: data.ToUserName,
@@ -72,7 +72,7 @@ router.post('/',xmlparser({trim:false}), function(req, res, next) {
                     MsgType: "text",
                     Content:"这是一个音频！"
                 };
-            break;
+                break;
             case "video":
                 msg = {
                     FromUserName: data.ToUserName,
@@ -82,7 +82,7 @@ router.post('/',xmlparser({trim:false}), function(req, res, next) {
                     MsgType: "text",
                     Content:"这是一个视频！"
                 };
-            break;
+                break;
         }
         res.send(wechat.toXml(msg));
     } catch (e) {
